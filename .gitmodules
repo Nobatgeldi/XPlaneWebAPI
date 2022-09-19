@@ -1,0 +1,3 @@
+[submodule "XPlaneConnector"]
+	path = XPlaneConnector
+	url =https://github.com/MaxFerretti/XPlaneConnector.git

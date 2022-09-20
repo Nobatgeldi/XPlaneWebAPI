@@ -61,7 +61,7 @@ namespace XPlaneDotNetCoreWebAPI
             });
             builder.WebHost.ConfigureKestrel(serverOptions =>
             {
-                serverOptions.Listen(IPAddress.Any, 8443,
+                serverOptions.Listen(IPAddress.Any, 7208,
                             listenOptions =>
                             {
                                 listenOptions.UseHttps("myssl.pfx", "45548598");

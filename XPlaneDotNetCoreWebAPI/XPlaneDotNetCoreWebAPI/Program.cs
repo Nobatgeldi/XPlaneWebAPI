@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.OpenApi.Interfaces;
 using Microsoft.OpenApi.Models;
+using System.Net;
 using System.Reflection;
 using XPlaneConnector;
 using XPlaneConnector.DataRefs;
@@ -9,7 +11,7 @@ namespace XPlaneDotNetCoreWebAPI
     public class Program
     {
         public static void Main(string[] args)
-        {      
+        {
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -39,23 +41,27 @@ namespace XPlaneDotNetCoreWebAPI
 
                 });
             });
-
+            builder.WebHost.ConfigureKestrel(serverOptions =>
+            {
+                serverOptions.ConfigureEndpointDefaults(listenOptions =>
+                {
+                    serverOptions.Listen(IPAddress.Any, 8443);
+                });
+            });
             var app = builder.Build();
-
             /*// Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }*/
-
+            
             app.UseSwagger();
             app.UseSwaggerUI();
 
             //app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

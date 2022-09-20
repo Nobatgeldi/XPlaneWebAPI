@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="XPlaneConnector\**" />
+    <Compile Remove="XPlaneDotNetCoreWebAPI\**" />
+    <Content Remove="XPlaneConnector\**" />
+    <Content Remove="XPlaneDotNetCoreWebAPI\**" />
+    <EmbeddedResource Remove="XPlaneConnector\**" />
+    <EmbeddedResource Remove="XPlaneDotNetCoreWebAPI\**" />
+    <None Remove="XPlaneConnector\**" />
+    <None Remove="XPlaneDotNetCoreWebAPI\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="6.0.9" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="XPlaneConnector\XPlaneConnector\XPlaneConnector.DataRefs\XPlaneConnector.DataRefs.csproj" />
+    <ProjectReference Include="XPlaneConnector\XPlaneConnector\XPlaneConnector\XPlaneConnector.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="myssl.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

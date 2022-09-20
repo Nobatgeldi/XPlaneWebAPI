@@ -1,37 +1,13 @@
 using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Authentication.Certificate;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.AspNetCore.Server.Kestrel.Https;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Interfaces;
 using Microsoft.OpenApi.Models;
 using System.Net;
-using System.Reflection;
-using System.Security.Claims;
-using XPlaneConnector;
-using XPlaneConnector.DataRefs;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace XPlaneDotNetCoreWebAPI
 {
     public class Program
     {
-
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-            .UseKestrel(options =>
-            {
-                options.Listen(IPAddress.Loopback, 7208);
-                options.Listen(IPAddress.Loopback, 5208, listenOptions =>
-                {
-                    listenOptions.UseHttps("myssl.pfx", "45548598");
-                });
-            })
-            .UseStartup<Startup>();
-        /*public static void Main(string[] args) {
-
-            CreateWebHostBuilder(args).Build().Run();
-
-        }*/
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -39,10 +15,25 @@ namespace XPlaneDotNetCoreWebAPI
             // Add services to the container.
             builder.Services.AddControllers();
 
+            builder.Services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(60);
+                options.ExcludedHosts.Add("covisart.com");
+                options.ExcludedHosts.Add("xplane.covisart.com");
+            });
+
+            builder.Services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = (int)HttpStatusCode.TemporaryRedirect;
+                options.HttpsPort = 7208;
+            });
+
             builder.Services.AddCors(options =>
                     options.AddDefaultPolicy(build =>
                     build.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()
-                ));
+            ));
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -68,13 +59,23 @@ namespace XPlaneDotNetCoreWebAPI
 
                 });
             });
-            
+            builder.WebHost.ConfigureKestrel(serverOptions =>
+            {
+                serverOptions.Listen(IPAddress.Any, 8443,
+                            listenOptions =>
+                            {
+                                listenOptions.UseHttps("myssl.pfx", "45548598");
+                            });
+            });
+
             var app = builder.Build();
 
+            app.UseExceptionHandler("/Error");
             app.UseHsts();
             app.UseHttpsRedirection();
             app.UseCors();
             app.UseRouting();
+            app.UseStaticFiles();
 
             app.UseSwagger();
             app.UseSwaggerUI();

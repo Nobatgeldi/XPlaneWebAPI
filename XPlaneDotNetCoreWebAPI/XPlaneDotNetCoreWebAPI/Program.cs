@@ -34,56 +34,17 @@ namespace XPlaneDotNetCoreWebAPI
         }*/
         public static void Main(string[] args)
         {
-            
-
-            Console.WriteLine(Path.Combine(Directory.GetCurrentDirectory(), "myssl.pfx"));
-
-            var clientCertificate =
-            new System.Security.Cryptography.X509Certificates.X509Certificate2(
-              Path.Combine(Directory.GetCurrentDirectory(), "myssl.pfx"), "45548598");
-
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddHttpClient("namedClient", c =>{})
-                .ConfigurePrimaryHttpMessageHandler(() =>
-                {
-                    var handler = new HttpClientHandler();
-                    handler.ClientCertificates.Add(clientCertificate);
-                    return handler;
-                });
             // Add services to the container.
-
             builder.Services.AddControllers();
+
+            builder.Services.AddCors(options =>
+                    options.AddDefaultPolicy(build =>
+                    build.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()
+                ));
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddAuthentication(
-                CertificateAuthenticationDefaults.AuthenticationScheme)
-            .AddCertificate(options =>
-            {
-                options.Events = new CertificateAuthenticationEvents
-                {
-                    OnCertificateValidated = context =>
-                    {
-                        var claims = new[]
-                        {
-                            new Claim(
-                                ClaimTypes.NameIdentifier,
-                                context.ClientCertificate.Subject,
-                                ClaimValueTypes.String, context.Options.ClaimsIssuer),
-                            new Claim(
-                                ClaimTypes.Name,
-                                context.ClientCertificate.Subject,
-                                ClaimValueTypes.String, context.Options.ClaimsIssuer)
-                        };
-
-                        context.Principal = new ClaimsPrincipal(
-                            new ClaimsIdentity(claims, context.Scheme.Name));
-                        context.Success();
-
-                        return Task.CompletedTask;
-                    }
-                };
-            });
-
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -110,22 +71,23 @@ namespace XPlaneDotNetCoreWebAPI
             
             var app = builder.Build();
 
-            /*// Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }*/
+            app.UseHsts();
+            app.UseHttpsRedirection();
+            app.UseCors();
+            app.UseRouting();
 
             app.UseSwagger();
             app.UseSwaggerUI();
 
-            app.UseHttpsRedirection();
             app.UseAuthorization();
             app.UseAuthentication();
 
-            app.MapControllers();
+            //app.MapControllers();
 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
             app.Run();
         }
     }

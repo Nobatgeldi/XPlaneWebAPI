@@ -14,8 +14,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      
       - uses: actions/checkout@v2
 
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
+        
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:

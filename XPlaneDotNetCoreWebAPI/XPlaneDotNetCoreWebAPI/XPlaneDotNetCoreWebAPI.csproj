@@ -7,12 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="6.0.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\XPlaneConnector\XPlaneConnector\XPlaneConnector.DataRefs\XPlaneConnector.DataRefs.csproj" />
     <ProjectReference Include="..\..\XPlaneConnector\XPlaneConnector\XPlaneConnector\XPlaneConnector.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="myssl.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

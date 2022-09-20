@@ -41,13 +41,13 @@ namespace XPlaneDotNetCoreWebAPI
 
                 });
             });
-            builder.WebHost.ConfigureKestrel(serverOptions =>
+            /*builder.WebHost.ConfigureKestrel(serverOptions =>
             {
                 serverOptions.ConfigureEndpointDefaults(listenOptions =>
                 {
                     serverOptions.Listen(IPAddress.Any, 8443);
                 });
-            });
+            });*/
             var app = builder.Build();
             /*// Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

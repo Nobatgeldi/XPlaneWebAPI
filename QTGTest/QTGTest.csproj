@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <LangVersion>latestmajor</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -85,6 +86,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ArrayToExcel\ArrayToExcel\ArrayToExcel.csproj">
+      <Project>{5974f64e-22c2-4bb6-9ebe-d963acc4e09d}</Project>
+      <Name>ArrayToExcel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XPlaneConnector\XPlaneConnector\XPlaneConnector.DataRefs\XPlaneConnector.DataRefs.csproj">
       <Project>{ed8b4d28-4492-4d4b-a26c-e3386e096fea}</Project>
       <Name>XPlaneConnector.DataRefs</Name>

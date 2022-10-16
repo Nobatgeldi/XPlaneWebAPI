@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XPlaneDotNetCoreWebAPI", "X
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QTGTest", "QTGTest\QTGTest.csproj", "{9788FEC4-FAB7-44BE-9EE7-EF0E6BCE1F8E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArrayToExcel", "ArrayToExcel\ArrayToExcel\ArrayToExcel.csproj", "{5974F64E-22C2-4BB6-9EBE-D963ACC4E09D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{9788FEC4-FAB7-44BE-9EE7-EF0E6BCE1F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9788FEC4-FAB7-44BE-9EE7-EF0E6BCE1F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9788FEC4-FAB7-44BE-9EE7-EF0E6BCE1F8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5974F64E-22C2-4BB6-9EBE-D963ACC4E09D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5974F64E-22C2-4BB6-9EBE-D963ACC4E09D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5974F64E-22C2-4BB6-9EBE-D963ACC4E09D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5974F64E-22C2-4BB6-9EBE-D963ACC4E09D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,6 +15,14 @@
     <EmbeddedResource Remove="XPlaneDotNetCoreWebAPI\**" />
     <None Remove="XPlaneConnector\**" />
     <None Remove="XPlaneDotNetCoreWebAPI\**" />
+    <Compile Remove="ArrayToExcel\**" />
+    <EmbeddedResource Remove="ArrayToExcel\**" />
+    <None Remove="ArrayToExcel\**" />
+    <Content Remove="ArrayToExcel\**" />
+    <Compile Remove="QTGTest\**" />
+    <EmbeddedResource Remove="QTGTest\**" />
+    <None Remove="QTGTest\**" />
+    <Content Remove="QTGTest\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +39,19 @@
     <None Update="myssl.pfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="ArrayToExcel\ArrayToExcel\bin\Release\net6.0\ArrayToExcel.deps.json" />
+    <_ContentIncludedByDefault Remove="ArrayToExcel\ArrayToExcel\bin\Release\netstandard2.0\ArrayToExcel.deps.json" />
+    <_ContentIncludedByDefault Remove="ArrayToExcel\ArrayToExcel\obj\ArrayToExcel.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="ArrayToExcel\ArrayToExcel\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="ArrayToExcel\ArrayToExcel\obj\project.packagespec.json" />
+    <_ContentIncludedByDefault Remove="QTGTest\App.config" />
+    <_ContentIncludedByDefault Remove="QTGTest\bin\Release\QTGTest.exe.config" />
+    <_ContentIncludedByDefault Remove="QTGTest\packages.config" />
+    <_ContentIncludedByDefault Remove="QTGTest\bin\Releasedata.json" />
+    <_ContentIncludedByDefault Remove="QTGTest\bin\Release\data.json" />
   </ItemGroup>
 
 </Project>

@@ -1,3 +1,6 @@
 [submodule "XPlaneConnector"]
 	path = XPlaneConnector
 	url =https://github.com/MaxFerretti/XPlaneConnector.git
+[submodule "ArrayToExcel"]
+	path = ArrayToExcel
+	url = https://github.com/mustaddon/ArrayToExcel.git

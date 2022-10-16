@@ -12,25 +12,6 @@ namespace XPlaneDotNetCoreWebAPI
             // Add services to the container.
             builder.Services.AddControllers();
 
-            /*builder.Services.AddHsts(options =>
-            {
-                options.Preload = true;
-                options.IncludeSubDomains = true;
-                options.MaxAge = TimeSpan.FromDays(60);
-                options.ExcludedHosts.Add("covisart.com");
-                options.ExcludedHosts.Add("xplane.covisart.com");
-            });
-            builder.Services.AddHttpsRedirection(options =>
-            {
-                options.RedirectStatusCode = (int)HttpStatusCode.TemporaryRedirect;
-                options.HttpsPort = 7208;
-            });
-
-            builder.Services.AddCors(options =>
-                    options.AddDefaultPolicy(build =>
-                    build.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()
-            ));*/
-
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c => {
@@ -55,22 +36,8 @@ namespace XPlaneDotNetCoreWebAPI
 
                 });
             });
-            /*builder.WebHost.ConfigureKestrel(serverOptions =>
-            {
-                serverOptions.Listen(IPAddress.Any, 7208,
-                            listenOptions =>
-                            {
-                                listenOptions.UseHttps("myssl.pfx", "45548598");
-                            });
-            });*/
 
             var app = builder.Build();
-
-            /*app.UseExceptionHandler("/Error");
-            app.UseHsts();
-            app.UseCors();
-            app.UseRouting();
-            app.UseStaticFiles();*/
 
             app.UseHttpsRedirection();
 
@@ -78,7 +45,6 @@ namespace XPlaneDotNetCoreWebAPI
             app.UseSwaggerUI();
 
             app.UseAuthorization();
-            //app.UseAuthentication();
 
             app.MapControllers();
 
